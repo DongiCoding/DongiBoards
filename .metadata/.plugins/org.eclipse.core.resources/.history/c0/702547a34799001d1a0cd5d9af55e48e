@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  /* 아래의 내용이 layout.html의 헤드 부분에 적용 */
+	  <head th:fragment="config">
+		  /* 제목(웹페이지 상단에 뜨는) */
+		  <title>Dongi_Boards</title>
+		  /* 한글 사용을 위한 UTF-8 설정 */
+		  <meta charset="UTF-8"/>
+		  
+		  <!---->
+	  </head>
+</html>

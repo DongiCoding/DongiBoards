@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko"
+      /* 타임리프 */
+      xmlns:th="http://www.thymeleaf.org"
+      /* 타임리프 레이아웃 */
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    /* fragments/config라는 파일에 th:fragment="config" 태그 내용으로 대체. */
+	<head th:replace="/fragments/config :: config">	
+		
+	</head>      
+	<body>
+		<header></header>
+		<div></div>
+		<footer></footer>
+	</body>
+	</html>
