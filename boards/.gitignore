@@ -1,6 +1,6 @@
-/.metadata/
-/boards/src/main/resources/application.properties
-/boards/src/test/
+dongiBoard/.metadata/
+dongiBoard/boards/src/main/resources/application.properties
+dongiBoard/boards/src/test/
 
 
 HELP.md
