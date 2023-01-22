@@ -1,6 +1,5 @@
-dongiBoard/.metadata/
-dongiBoard/boards/src/main/resources/application.properties
-dongiBoard/boards/src/test/
+application.properties
+/boards/src/test/
 
 
 HELP.md
@@ -43,7 +42,7 @@ out/
 .vscode/
 
 ### Eclipse ###
-.metadata
+.metadata/
 bin/
 tmp/
 *.tmp
