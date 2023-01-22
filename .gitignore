@@ -1,6 +1,6 @@
 application.properties
-/boards/src/test/
-
+dongiBoard/boards/src/test/
+dongiBoard/.metadata/
 
 HELP.md
 .gradle
