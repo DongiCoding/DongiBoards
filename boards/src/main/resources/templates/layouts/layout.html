@@ -4,13 +4,18 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       
-    <!-- fragments/config라는 파일에 th:fragment="config" 태그 내용으로 대체. -->
+    <!-- fragments/config.html라는 파일에 th:fragment="config" 태그의 내용으로 대체 -->
 	<head th:replace="/fragments/config :: config">	
 		
 	</head>      
 	<body>
-		<header></header>
-		<div></div>
-		<footer></footer>
+		<!-- fragments/header.html이라는 파일에 th:fragment="header" 태그의 내용으로 대체 -->
+		<header th:replace="/fragments/header :: header"></header>
+		
+		<!-- 본문 내용 -->
+		<div layout:fragment="content"></div>
+		
+		<!-- fragments/footer.html이라는 파일에 th:fragment="footer" 태그의 내용으로 대체-->
+		<footer th:replace="/fragments/footer :: footer"></footer>
 	</body>
 	</html>
