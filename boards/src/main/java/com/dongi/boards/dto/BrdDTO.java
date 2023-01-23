@@ -15,7 +15,7 @@ public class BrdDTO {
 	private int brdNm;
 	private int brdCnt;
 	private String brdCntnt;
-	private LocalDateTime brdDttme;
+	private LocalDateTime brdDttm;
 	private String brdTtl;
 	private String brdWrtr;
 	private int brdCtgry;

@@ -1,36 +1,32 @@
 <!DOCTYPE>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layouts/layout}">
-	  <head>
-		  
-	  </head>
-	  <body>
-		  <div layout:fragment="content">
-		  	<div>
-		    	<h1>Dongi's Boards</h1>
-			</div>
-			<div>
-				<table class="table">
-				  <thead>
-				    <tr>
-				      <th scope="col">#</th>
-				      <th scope="col">First</th>
-				      <th scope="col">Last</th>
-				      <th scope="col">Handle</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				    </tr>
-				  </tbody>
-				</table>				
-			</div>
-		  </div>
-	  </body>
+<html layout:decorate="~{layouts/layout}">
+  <div layout:fragment="content">
+	<div class="w-75 p-3" id="table_wrapper">
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col" style="width: 10%;">Number</th>
+		      <th scope="col" style="width: 10%;">Category</th>
+		      <th scope="col" style="width: 40%;">Title</th>
+		      <th scope="col" style="width: 15%;">Writer</th>
+		      <th scope="col" style="width: 10%;">Views</th>
+		      <th scope="col" style="width: 15%;">Time</th>
+		    </tr>
+		  </thead>
+		  <tbody th:each="brd : ${brdList}">
+		    <tr>
+		      <td th:text="${brd.brdNm}"></td>
+		      <td th:text="${brd.brdCtgry}"></td>
+		      <td th:text="${brd.brdTtl}"></td>
+		      <td th:text="${brd.brdWrtr}"></td>
+		      <td th:text="${brd.brdCnt}"></td>
+		      <td th:text="${brd.brdDttm}"></td>
+		    </tr>
+		  </tbody>
+		</table>	
+	</div>
+	<div class="w-75 pt-3 pb-3 d-flex flex-row-reverse justify-content-start">
+		<button type="button" class="btn btn-outline-primary" onclick="location.href='/brd/wrtBrd'">Write</button>&emsp;
+	</div>
+  </div>  
 </html>

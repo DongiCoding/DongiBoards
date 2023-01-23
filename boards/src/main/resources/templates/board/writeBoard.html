@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<html layout:decorate="~{layouts/layout}">
+  <div layout:fragment="content">
+	  <form action="/brd/insrtBrd" method="post">
+		<div class="w-50 p-3 m-auto">
+			<select name="brdCtgry" class="form-select mb-3" aria-label="Default select example">
+			  <option selected>CATEGORY</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">TITLE</span>
+			  </div>
+			  <input name="brdTtl" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">WRITER</span>
+			  </div>
+			  <input name="brdWrtr" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">CONTENT</span>
+			  </div>
+			  <textarea name="brdCntnt" class="form-control" aria-label="With textarea"></textarea>
+			</div>						
+		</div>
+		<div class="w-75 pt-3 pb-3 d-flex justify-content-end">
+			<button type="submit" class="btn btn-outline-primary">Submit</button>&emsp;
+		</div>
+	  </form>
+  </div>
+</html>

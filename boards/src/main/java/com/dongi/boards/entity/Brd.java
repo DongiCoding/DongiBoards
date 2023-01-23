@@ -10,11 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@DynamicInsert
 @Entity                                						// 엔티티 선언
 @Table(name="T_BRD")                   						// 테이블 네임
 @Data								  					    // lombok: getter, setter
@@ -36,13 +40,14 @@ public class Brd {
 	private int brdNm;                                      // 게시글 번호, primary key
 	
 	@Column(nullable = false)                               // NotNull
+	@ColumnDefault("0")
 	private int brdCnt;                                     // 게시글 조회수
 	
 	@Column(length = 1000, nullable = false)				// NotNull
 	private String brdCntnt;								// 게시글 내용
 	
 	@Column(nullable = false)                               // NotNull
-	private LocalDateTime brdDttme;                         // 게시글 등록시간
+	private LocalDateTime brdDttm;                         // 게시글 등록시간
 	
 	@Column(nullable = false)                               // NotNull
 	private String brdTtl;                                  // 게시글 제목
@@ -57,9 +62,11 @@ public class Brd {
 	private int brdOrgnNm;                                  // 게시글 본래의 번호
 	
 	@Column(nullable = false)                               // NotNull
+	@ColumnDefault("0")
 	private int brdGrpOrdr;                                 // 게시글의 답글이 달릴 때 그것을 그룹으로 묶는다, 그 그룹안에서의 순서
 	
 	@Column(nullable = false)                               // NotNull
+	@ColumnDefault("0")
 	private int brdGrpLyr;                                  // 게시글 답글의 층계, 예를 들어 답글의 답글을 달 수 있게 만듬
 	
 	

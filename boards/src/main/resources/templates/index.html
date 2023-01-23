@@ -1,18 +1,10 @@
 <!DOCTYPE>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layouts/layout}">
-	  <head>
-		  
-	  </head>
-	  <body>
-		  <div layout:fragment="content">
-		  	<div style="text-align: center;">
-				  <h1>
-					  <a th:href="@{/board/mainBoard.html}" id="mainTitle">Dongi's Boards</a>
-				  </h1>
-			</div>
-		  </div>
-	  </body>
+<html layout:decorate="~{layouts/layout}">
+  <div layout:fragment="content">
+  	<div style="text-align: center;">
+		  <h1>
+			  <a th:href="@{/brd/brdList}" id="mainTitle">Dongi's Boards</a>
+		  </h1>
+	</div>
+  </div>
 </html>
