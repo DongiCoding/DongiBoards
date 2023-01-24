@@ -15,5 +15,8 @@ public interface BrdService {
 	
 	// 게시글의 제목 클릭시 조회수 증가
 	void updtBrdCnt(int brdNm);
+	
+	// 게시글의 제목 클릭시 게시글 상세조회
+	BrdDTO gtBrd(int brdNm);
 
 }

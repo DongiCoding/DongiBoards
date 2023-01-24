@@ -26,7 +26,7 @@ public class BrdController {
 	
 	// 보드 리스트를 불러오는 맵핑
 	@GetMapping("/brdList")
-	public ModelAndView getBrdList(
+	public ModelAndView gtBrdList(
 									BrdDTO brdDto,                                           // 화면단에 정보를 뿌려주기 위한 틀
 									@PageableDefault(page = 0, size = 10) Pageable pageable  // 페이지는 0부터 10개의 게시글
 								  ) {
@@ -62,5 +62,18 @@ public class BrdController {
 		brdService.updtBrdCnt(brdNm);
 		
 		response.sendRedirect("/brd/brd/" + brdNm);
+	}
+	
+	// 게시글의 제목 클릭시 게시글 상세조회
+	@GetMapping("/brd/{brdNm}")
+	public ModelAndView gtBrd(@PathVariable int brdNm) {
+		// 화면단에 보여주기 위해 SERVICE에서 DTO로 변환할 예정
+		BrdDTO brdDTO = brdService.gtBrd(brdNm);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/viewBoard.html");
+		mv.addObject("brd", brdDTO);
+		
+		return mv;
 	}
 }

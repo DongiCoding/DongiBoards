@@ -71,5 +71,28 @@ public class BrdServiceImpl implements BrdService {
 		brdRepository.updtBrdCnt(brdNm);
 		
 	}
+	
+	// 게시글의 제목 클릭시 게시글 상세조회
+	@Override
+	public BrdDTO gtBrd(int brdNm) {
+		// 게시글이 존재하지 않을 경우 null
+		Brd brd = brdRepository.findById(brdNm).orElse(null);
+		
+		// ENTITY를 DTO로 변환
+		BrdDTO brdDTO = BrdDTO.builder()
+				              .brdNm(brd.getBrdNm())
+				              .brdCnt(brd.getBrdCnt())
+				              .brdCntnt(brd.getBrdCntnt())
+				              .brdDttm(brd.getBrdDttm())
+				              .brdTtl(brd.getBrdTtl())
+				              .brdWrtr(brd.getBrdWrtr())
+				              .brdCtgry(brd.getBrdCtgry())
+				              .brdOrgnNm(brd.getBrdOrgnNm())
+				              .brdGrpOrdr(brd.getBrdGrpOrdr())
+				              .brdGrpLyr(brd.getBrdGrpLyr())
+				              .build();
+		// 변환한 DTO를 반환
+		return brdDTO;
+	}
 
 }
