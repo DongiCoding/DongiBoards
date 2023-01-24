@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,5 +54,13 @@ public class BrdController {
 		brdService.insrtBrd(brdDTO);
 		
 		response.sendRedirect("/brd/brdList");
+	}
+	
+	// 게시글의 제목 클릭시 조회수 증가
+	@GetMapping("/updtBrdCnt/{brdNm}")
+	public void updtBrdCnt(@PathVariable int brdNm, HttpServletResponse response) throws IOException {
+		brdService.updtBrdCnt(brdNm);
+		
+		response.sendRedirect("/brd/brd/" + brdNm);
 	}
 }

@@ -64,5 +64,12 @@ public class BrdServiceImpl implements BrdService {
 		brdRepository.flush();
 		
 	}
+	
+	// 게시글의 제목 클릭시 조회수 증가
+	@Override
+	public void updtBrdCnt(int brdNm) {
+		brdRepository.updtBrdCnt(brdNm);
+		
+	}
 
 }

@@ -17,15 +17,15 @@
 		    <tr>
 		      <td th:text="${brd.brdNm}"></td>
 		      <td th:text="${brd.brdCtgry}"></td>
-		      <td th:text="${brd.brdTtl}"></td>
+		      <td><a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
 		      <td th:text="${brd.brdWrtr}"></td>
 		      <td th:text="${brd.brdCnt}"></td>
-		      <td th:text="${brd.brdDttm}"></td>
+		      <td th:text="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}"></td>
 		    </tr>
 		  </tbody>
 		</table>	
 	</div>
-	<div class="w-75 pt-3 pb-3 d-flex flex-row-reverse justify-content-start">
+	<div class="w-75 p-3 d-flex justify-content-end" id="write_btn_wrapper">
 		<button type="button" class="btn btn-outline-primary" onclick="location.href='/brd/wrtBrd'">Write</button>&emsp;
 	</div>
   </div>  

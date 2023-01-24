@@ -12,5 +12,8 @@ public interface BrdService {
 	
 	// 작성한 보드 등록
 	void insrtBrd(BrdDTO brdDTO);
+	
+	// 게시글의 제목 클릭시 조회수 증가
+	void updtBrdCnt(int brdNm);
 
 }
