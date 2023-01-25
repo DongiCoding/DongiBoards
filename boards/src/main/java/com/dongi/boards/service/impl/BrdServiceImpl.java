@@ -94,5 +94,14 @@ public class BrdServiceImpl implements BrdService {
 		// 변환한 DTO를 반환
 		return brdDTO;
 	}
+	
+	// 특정 게시글 삭제
+	@Transactional
+	@Override
+	public void dltBrd(int brdNm) {
+		brdRepository.deleteById(brdNm);
+	}
+	
+
 
 }

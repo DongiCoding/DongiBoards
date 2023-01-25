@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html layout:decorate="~{layouts/layout}">
+  <div layout:fragment="content">
+	  <form id="updtForm" action="/brd/updtBrd">
+		<div class="w-50 p-3 m-auto">
+			<!-- 보이지 않아도 될 정보들 = brdOrgnNm, brdGrpOrdr, brdGrpLyr -->
+			<input name="brdOrgnNm" type="hidden" th:value="${brd.brdOrgnNm}">
+			<input name="brdGrpOrdr" type="hidden" th:value="${brd.brdGrpOrdr}">
+			<input name="brdGrpLyr" type="hidden" th:value="${brd.brdGrpLyr}">
+			<select name="brdCtgry" th:value="${brd.brdCtgry}" class="form-select mb-3" aria-label="Default select example">
+			  <option selected value="0">CATEGORY</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">NUMBER</span>
+			  </div>
+			  <input name="brdNm" th:value="${brd.brdNm}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">VIEWS</span>
+			  </div>
+			  <input name="brdCnt" th:value="${brd.brdCnt}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">TIME</span>
+			  </div>
+			  <input name="brdDttm" th:value="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			</div>								
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">TITLE</span>
+			  </div>
+			  <input name="brdTtl" th:value="${brd.brdTtl}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">WRITER</span>
+			  </div>
+			  <input name="brdWrtr" th:value="${brd.brdWrtr}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">CONTENT</span>
+			  </div>
+			  <textarea name="brdCntnt" th:value="${brd.brdCntnt}" th:text="${brd.brdCntnt}" class="form-control" aria-label="With textarea"></textarea>
+			</div>						
+		</div>
+		<div class="w-75 pt-3 pb-3 d-flex justify-content-end">
+			<button type="button" class="btn btn-outline-primary">Edit</button>&emsp;
+		</div>
+	  </form>
+  </div>
+</html>

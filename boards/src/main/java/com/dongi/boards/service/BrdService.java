@@ -18,5 +18,8 @@ public interface BrdService {
 	
 	// 게시글의 제목 클릭시 게시글 상세조회
 	BrdDTO gtBrd(int brdNm);
+	
+	// 특정 게시글 삭제
+	void dltBrd(int brdNm);
 
 }
