@@ -1,13 +1,69 @@
 <!DOCTYPE>
 <html layout:decorate="~{layouts/layout}">
+	<th:block layout:fragment="script">
+	  <script th:inline="javascript">
+		  // jquery 시작
+		  $(function() {
+			  // 게시글 삭제 기능
+			  // 삭제 버튼이 클릭되면
+			  $("#dltBtn").on("click", function() {
+				  // ajax로 해당 게시글 삭제 요청
+				  $.ajax({
+					  url: '/brd/dltBrd',
+					  type: 'delete',
+					  data: {brdNm: $("input[name='brdNm']").val()},
+					  success: function() {
+						  alert("It has been deleted.");
+						  window.location.href="/brd/brdList";
+					  },
+					  error: function(e) {
+						  console.log("ERROR: " + e);
+					  }
+				  });
+			  });// 게시글 삭제 기능
+			  
+			  // 게시글 수정 기능
+			  // 수정 버튼이 클릭되면
+			  $("$edtBtn").on("click", function() {
+				  // 데이터를 FormData로 보내기 위한 객체 생성
+				  let formData = new FormData($("$updtForm")[0]);
+				  
+				  $.ajax({
+					 enctype: 'multipart/form-data',
+					 url: '/brd/updtBrd',
+					 type: 'put',
+					 data: formData,
+					 processData: false,
+					 contentType: false,
+					 success: function(obj) {
+						 console.log("It has been edited.");
+						 $("#brdNm").val(obj.item.brd.brdNm);
+						 $("#brdCnt").val(obj.item.brd.brdNm);
+						 $("#brdCntnt").text(obj.item.brd.brdNm);
+						 $("#brdDttm").val(obj.item.brd.brdNm);
+						 $("#brdTtl").val(obj.item.brd.brdNm);
+						 $("#brdWrtr").val(obj.item.brd.brdNm);
+						 $("#brdCtgry").val(obj.item.brd.brdNm);
+						 $("#brdOrgnNm").val(obj.item.brd.brdNm);
+						 $("#brdGrpOrdr").val(obj.item.brd.brdNm);
+						 $("#brdGrpLyr").val(obj.item.brd.brdNm);
+					 },
+					 error: function(e) {
+						 console.log("ERROR: " + e);
+					 }
+				  });  				  
+			  });// 게시글 수정 기능
+		  });// jquery 끝
+	  </script>
+  </th:block>
   <div layout:fragment="content">
-	  <form id="updtForm" action="/brd/updtBrd">
+	  <form id="updtForm" enctype="multipart/form-data">
 		<div class="w-50 p-3 m-auto">
 			<!-- 보이지 않아도 될 정보들 = brdOrgnNm, brdGrpOrdr, brdGrpLyr -->
-			<input name="brdOrgnNm" type="hidden" th:value="${brd.brdOrgnNm}">
-			<input name="brdGrpOrdr" type="hidden" th:value="${brd.brdGrpOrdr}">
-			<input name="brdGrpLyr" type="hidden" th:value="${brd.brdGrpLyr}">
-			<select name="brdCtgry" th:value="${brd.brdCtgry}" class="form-select mb-3" aria-label="Default select example">
+			<input id="brdOrgnNm" name="brdOrgnNm" type="hidden" th:value="${brd.brdOrgnNm}">
+			<input id="brdGrpOrdr" name="brdGrpOrdr" type="hidden" th:value="${brd.brdGrpOrdr}">
+			<input id="brdGrpLyr" name="brdGrpLyr" type="hidden" th:value="${brd.brdGrpLyr}">
+			<select id="brdCtgry" name="brdCtgry" th:value="${brd.brdCtgry}" class="form-select mb-3" aria-label="Default select example">
 			  <option selected value="0">CATEGORY</option>
 			  <option value="1">One</option>
 			  <option value="2">Two</option>
@@ -17,41 +73,42 @@
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">NUMBER</span>
 			  </div>
-			  <input name="brdNm" th:value="${brd.brdNm}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			  <input id="brdNm" name="brdNm" th:value="${brd.brdNm}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
 			</div>
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">VIEWS</span>
 			  </div>
-			  <input name="brdCnt" th:value="${brd.brdCnt}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			  <input id="brdCnt" name="brdCnt" th:value="${brd.brdCnt}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
 			</div>
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">TIME</span>
 			  </div>
-			  <input name="brdDttm" th:value="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			  <input id="brdDttm" name="brdDttm" th:value="${brd.brdDttm}" th:text="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
 			</div>								
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">TITLE</span>
 			  </div>
-			  <input name="brdTtl" th:value="${brd.brdTtl}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+			  <input id="brdTtl" name="brdTtl" th:value="${brd.brdTtl}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 			</div>
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">WRITER</span>
 			  </div>
-			  <input name="brdWrtr" th:value="${brd.brdWrtr}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+			  <input id="brdWrtr" name="brdWrtr" th:value="${brd.brdWrtr}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 			</div>
 			<div class="input-group">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text">CONTENT</span>
 			  </div>
-			  <textarea name="brdCntnt" th:value="${brd.brdCntnt}" th:text="${brd.brdCntnt}" class="form-control" aria-label="With textarea"></textarea>
+			  <textarea id="brdCntnt" name="brdCntnt" th:value="${brd.brdCntnt}" th:text="${brd.brdCntnt}" class="form-control" aria-label="With textarea"></textarea>
 			</div>						
 		</div>
 		<div class="w-75 pt-3 pb-3 d-flex justify-content-end">
-			<button type="button" class="btn btn-outline-primary">Edit</button>&emsp;
+			<button type="button" class="btn btn-outline-primary" id="edtBtn">Edit</button>&emsp;
+			<button type="button" class="btn btn-outline-danger" id="dltBtn">Delete</button>&emsp;
 		</div>
 	  </form>
   </div>
