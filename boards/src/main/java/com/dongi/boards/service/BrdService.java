@@ -21,5 +21,8 @@ public interface BrdService {
 	
 	// 특정 게시글 삭제
 	void dltBrd(int brdNm);
+	
+	// 특정 게시글 수정
+	BrdDTO updtBrd(BrdDTO brdDTO);
 
 }

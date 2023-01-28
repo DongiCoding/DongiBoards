@@ -1,6 +1,7 @@
 package com.dongi.boards.service.impl;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +20,8 @@ public class BrdServiceImpl implements BrdService {
 	
 	// DB와 서비스 사이에서 교류 일을 해줄 일꾼
 	@Autowired BrdRepository brdRepository;
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 	
 	// 게시글 리스트 불러오는 메서드
 	@Override
@@ -100,6 +103,32 @@ public class BrdServiceImpl implements BrdService {
 	@Override
 	public void dltBrd(int brdNm) {
 		brdRepository.deleteById(brdNm);
+	}
+	
+	// 특정 게시글 수정
+	@Transactional // 예외나 에러 등장시 롤백
+	@Override
+	public BrdDTO updtBrd(BrdDTO brdDTO) {
+		// DTO를 ENTITY로 변환
+		Brd brd = Brd.builder()
+				     .brdNm(brdDTO.getBrdNm())
+				     .brdCnt(brdDTO.getBrdCnt())
+				     .brdCntnt(brdDTO.getBrdCntnt())
+				     .brdDttm(brdDTO.getBrdDttm())
+				     .brdTtl(brdDTO.getBrdTtl())
+				     .brdWrtr(brdDTO.getBrdWrtr())
+				     .brdCtgry(brdDTO.getBrdCtgry())
+				     .brdOrgnNm(brdDTO.getBrdOrgnNm())
+				     .brdGrpOrdr(brdDTO.getBrdGrpOrdr())
+				     .brdGrpLyr(brdDTO.getBrdGrpLyr())
+				     .build();
+		
+		// 수정된 데이터 저장
+		Brd rtrndBrd = brdRepository.save(brd);
+		brdRepository.flush();
+		
+		// 받아온 Entity를 DTO로 반환
+		return BrdDTO.trnsfrTBrdDTO(rtrndBrd);
 	}
 	
 

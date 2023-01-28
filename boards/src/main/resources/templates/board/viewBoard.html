@@ -24,29 +24,29 @@
 			  
 			  // 게시글 수정 기능
 			  // 수정 버튼이 클릭되면
-			  $("$edtBtn").on("click", function() {
+			  $("#edtBtn").on("click", function() {
 				  // 데이터를 FormData로 보내기 위한 객체 생성
-				  let formData = new FormData($("$updtForm")[0]);
+				  let formData = new FormData($("#updtForm")[0]);
 				  
 				  $.ajax({
 					 enctype: 'multipart/form-data',
 					 url: '/brd/updtBrd',
-					 type: 'put',
+					 type: 'post',
 					 data: formData,
 					 processData: false,
 					 contentType: false,
 					 success: function(obj) {
 						 console.log("It has been edited.");
-						 $("#brdNm").val(obj.item.brd.brdNm);
-						 $("#brdCnt").val(obj.item.brd.brdNm);
-						 $("#brdCntnt").text(obj.item.brd.brdNm);
-						 $("#brdDttm").val(obj.item.brd.brdNm);
-						 $("#brdTtl").val(obj.item.brd.brdNm);
-						 $("#brdWrtr").val(obj.item.brd.brdNm);
-						 $("#brdCtgry").val(obj.item.brd.brdNm);
-						 $("#brdOrgnNm").val(obj.item.brd.brdNm);
-						 $("#brdGrpOrdr").val(obj.item.brd.brdNm);
-						 $("#brdGrpLyr").val(obj.item.brd.brdNm);
+						 $("#brdNm").val(obj.item.brdNm);
+						 $("#brdCnt").val(obj.item.brdCnt);
+						 $("#brdCntnt").text(obj.item.brdCntnt);
+						 $("#brdDttm").val(obj.item.brdDttm);
+						 $("#brdTtl").val(obj.item.brdTtl);
+						 $("#brdWrtr").val(obj.item.brdWrtr);
+						 $("#brdCtgry").val(obj.item.brdCtgry);
+						 $("#brdOrgnNm").val(obj.item.brdOrgnNm);
+						 $("#brdGrpOrdr").val(obj.item.brdGrpOrdr);
+						 $("#brdGrpLyr").val(obj.item.brdGrpLyr);
 					 },
 					 error: function(e) {
 						 console.log("ERROR: " + e);
@@ -85,7 +85,8 @@
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">TIME</span>
 			  </div>
-			  <input id="brdDttm" name="brdDttm" th:value="${brd.brdDttm}" th:text="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
+			  <input id="brdDttm" name="brdDttm" th:value="${brd.brdDttm}" type="hidden">
+			  <input id="brdDttmTxt" name="brdDttmTxt" th:value="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly>
 			</div>								
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">

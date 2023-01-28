@@ -20,14 +20,14 @@ import lombok.NoArgsConstructor;
 
 @DynamicInsert
 @Entity                                						// 엔티티 선언
-@Table(name="T_BRD")                   						// 테이블 네임
-@Data								  					    // lombok: getter, setter
+@Table(name="T_BRD")                   						// 테이블 네임								  					    // lombok: getter, setter
 @SequenceGenerator(                    						// increment보다 유용하다, 조작 가능
 		name="BrdSequenceGenerator",
 		sequenceName="T_BRD_SQN",
 		initialValue=1,               						// 1부터 시작
 		allocationSize=1               						// 1씩 증가
 		)
+@Data
 @NoArgsConstructor                     						// lombok: 기본생성자
 @AllArgsConstructor                   					 	// lombok: 모든 매개변수를 받는 생성자
 @Builder                               						// lombok: 객체 생성, DTO 변경시 편함
@@ -68,6 +68,5 @@ public class Brd {
 	@Column(nullable = false)                               // NotNull
 	@ColumnDefault("0")
 	private int brdGrpLyr;                                  // 게시글 답글의 층계, 예를 들어 답글의 답글을 달 수 있게 만듬
-	
 	
 }
