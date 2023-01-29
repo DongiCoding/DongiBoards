@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -82,6 +81,19 @@ public class BrdController {
 		return mv;
 	}
 	
+	// 게시글 수정 페이지 이동
+	@GetMapping("/brd/edt/{brdNm}")
+	public ModelAndView gtBrdEdt(@PathVariable int brdNm) {
+		// 화면단에 보여주기 위해 SERVICE에서 DTO로 변환할 예정
+		BrdDTO brdDTO = brdService.gtBrd(brdNm);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/editBoard.html");
+		mv.addObject("brd", brdDTO);
+		
+		return mv;
+	}
+	
 	// 특정 게시글 삭제
 	@DeleteMapping("/dltBrd")
 	public void dltBrd(@RequestParam("brdNm") int brdNm ) {
@@ -90,10 +102,8 @@ public class BrdController {
 	
 	// 특정 게시글 수정
     @PostMapping("/updtBrd")
-    public ResponseEntity<BrdDTO> updtBrd(BrdDTO brdDTO, HttpServletResponse response) throws IOException {
+    public ResponseEntity<BrdDTO> updtBrd(BrdDTO brdDTO) {
     	BrdDTO rtrndBrdDTO = brdService.updtBrd(brdDTO);
-    	
-    	response.sendRedirect("/brd/brd/" + brdDTO.getBrdNm());
     	
 		return ResponseEntity.status(HttpStatus.OK).body(rtrndBrdDTO); 	
     }

@@ -4,55 +4,59 @@
 	  <script th:inline="javascript">
 		  // jquery 시작
 		  $(function() {
-			  // 게시글 삭제 기능
-			  // 삭제 버튼이 클릭되면
-			  $("#dltBtn").on("click", function() {
-				  // ajax로 해당 게시글 삭제 요청
-				  $.ajax({
-					  url: '/brd/dltBrd',
-					  type: 'delete',
-					  data: {brdNm: $("input[name='brdNm']").val()},
-					  success: function() {
-						  alert("It has been deleted.");
-						  window.location.href="/brd/brdList";
-					  },
-					  error: function(e) {
-						  console.log("ERROR: " + e);
-					  }
-				  });
-			  });// 게시글 삭제 기능
-			  
-			  // 게시글 수정 기능
-			  // 수정 버튼이 클릭되면
-			  $("#edtBtn").on("click", function() {
-				  // 데이터를 FormData로 보내기 위한 객체 생성
-				  let formData = new FormData($("#updtForm")[0]);
+			  /*<![CDATA[*/
+				  // CATEGORY 받아온 DB에서 value로 selected하기 위해 변수 지정
+				  let ctgryVl = [[${brd.brdCtgry}]];
 				  
-				  $.ajax({
-					 enctype: 'multipart/form-data',
-					 url: '/brd/updtBrd',
-					 type: 'post',
-					 data: formData,
-					 processData: false,
-					 contentType: false,
-					 success: function(obj) {
-						 console.log("It has been edited.");
-						 $("#brdNm").val(obj.item.brdNm);
-						 $("#brdCnt").val(obj.item.brdCnt);
-						 $("#brdCntnt").text(obj.item.brdCntnt);
-						 $("#brdDttm").val(obj.item.brdDttm);
-						 $("#brdTtl").val(obj.item.brdTtl);
-						 $("#brdWrtr").val(obj.item.brdWrtr);
-						 $("#brdCtgry").val(obj.item.brdCtgry);
-						 $("#brdOrgnNm").val(obj.item.brdOrgnNm);
-						 $("#brdGrpOrdr").val(obj.item.brdGrpOrdr);
-						 $("#brdGrpLyr").val(obj.item.brdGrpLyr);
-					 },
-					 error: function(e) {
-						 console.log("ERROR: " + e);
-					 }
-				  });  				  
-			  });// 게시글 수정 기능
+				  // selected 적용
+				  $("#brdCtgry").val(ctgryVl).prop("selected", true);
+				  
+				  // 게시글 삭제 기능
+				  // 삭제 버튼이 클릭되면
+				  $("#dltBtn").on("click", function() {
+					  // ajax로 해당 게시글 삭제 요청
+					  $.ajax({
+						  url: '/brd/dltBrd',
+						  type: 'delete',
+						  data: {brdNm: $("input[name='brdNm']").val()},
+						  success: function() {
+							  alert("It has been deleted.");
+							  window.location.href="/brd/brdList";
+						  },
+						  error: function(e) {
+							  console.log("ERROR: " + e);
+						  }
+					  });
+				  });// 게시글 삭제 기능
+				  
+				  // 게시글 수정 기능
+				  // 수정 버튼이 클릭되면
+				  $("#edtBtn").on("click", function() {
+					  // 데이터를 FormData로 보내기 위한 객체 생성
+					  let formData = new FormData($("#updtForm")[0]);
+					  
+					  $.ajax({
+						 enctype: 'multipart/form-data',
+						 url: '/brd/updtBrd',
+						 type: 'post',
+						 data: formData,
+						 processData: false,
+						 contentType: false,
+						 /*
+						 자바스크립트는 클래스라는 개념이 없다. 기존의 객체를 복사하여 새로운 객체를
+						 생선하는 프로토타입 언어이다.
+						 */
+						 success: function(obj) {
+							 alert("It has been edited.");
+							 window.location.href="/brd/brd/"+ obj['brdNm'];
+						 },
+						 error: function(e) {
+							 console.log("ERROR: " + e);
+						 }
+					  }); 
+					  console.log(obj); 				  
+				  });// 게시글 수정 기능
+			  /*]]>*/
 		  });// jquery 끝
 	  </script>
   </th:block>
@@ -108,7 +112,7 @@
 			</div>						
 		</div>
 		<div class="w-75 pt-3 pb-3 d-flex justify-content-end">
-			<button type="button" class="btn btn-outline-primary" id="edtBtn">Edit</button>&emsp;
+			<button type="button" class="btn btn-outline-primary" id="edtBtn">Confirm</button>&emsp;
 			<button type="button" class="btn btn-outline-danger" id="dltBtn">Delete</button>&emsp;
 		</div>
 	  </form>
