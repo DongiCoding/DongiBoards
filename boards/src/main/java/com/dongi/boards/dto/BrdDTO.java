@@ -43,4 +43,20 @@ public class BrdDTO {
 					brd.getBrdGrpLyr()
 				);
 	}
+	
+	// DTO를 Entity로 변환해주는 메서드
+	public static Brd trnsfrTBrd(BrdDTO brdDTO) {
+		return new Brd(
+					brdDTO.getBrdNm(),
+					brdDTO.getBrdCnt(),
+					brdDTO.getBrdCntnt(),
+					brdDTO.getBrdDttm(),
+					brdDTO.getBrdTtl(),
+					brdDTO.getBrdWrtr(),
+					brdDTO.getBrdCtgry(),
+					brdDTO.getBrdOrgnNm(),
+					brdDTO.getBrdGrpOrdr(),
+					brdDTO.getBrdGrpLyr()
+				);
+	}
 }

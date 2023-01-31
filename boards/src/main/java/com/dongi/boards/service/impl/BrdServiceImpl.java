@@ -60,7 +60,7 @@ public class BrdServiceImpl implements BrdService {
 				     .brdTtl(brdDTO.getBrdTtl())
 				     .brdWrtr(brdDTO.getBrdWrtr())
 				     .brdCtgry(brdDTO.getBrdCtgry())
-				     .brdOrgnNm(brdDTO.getBrdNm())
+				     .brdOrgnNm(brdDTO.getBrdNm())                  // 원래 글의 번호를 넣어준다.
 				     .build();
 		
 		brdRepository.save(brd);
@@ -130,6 +130,36 @@ public class BrdServiceImpl implements BrdService {
 		// 받아온 Entity를 DTO로 반환
 		return BrdDTO.trnsfrTBrdDTO(rtrndBrd);
 	}
+	
+	// 작성한 답글 등록
+	@Transactional
+	@Override
+	public BrdDTO isrtRplyBrd(BrdDTO brdDTO) {
+		System.out.println("****************************");
+		System.out.println(brdDTO);
+		System.out.println("****************************");
+		// DTO를 Entity로 전환
+		Brd brd = Brd.builder()
+			         .brdNm(brdDTO.getBrdNm())
+			         .brdCntnt(brdDTO.getBrdCntnt())
+			         .brdDttm(LocalDateTime.now())
+			         .brdTtl(brdDTO.getBrdTtl())
+			         .brdWrtr(brdDTO.getBrdWrtr())
+			         .brdCtgry(brdDTO.getBrdCtgry())
+			         .brdOrgnNm(brdDTO.getBrdOrgnNm())                  // 원래 글의 번호를 넣어준다.
+			         .brdGrpOrdr(brdDTO.getBrdGrpOrdr() + 1)
+			         .brdGrpLyr(brdDTO.getBrdGrpLyr() + 1)
+			         .build();
+		System.out.println("****************************");
+		System.out.println(brd);
+		System.out.println("****************************");
+		
+		Brd insrtd = brdRepository.save(brd);
+		brdRepository.flush();
+		
+		return BrdDTO.trnsfrTBrdDTO(insrtd);
+	}
+	
 	
 
 

@@ -2,6 +2,7 @@ package com.dongi.boards.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 
 import com.dongi.boards.dto.BrdDTO;
 
@@ -24,5 +25,8 @@ public interface BrdService {
 	
 	// 특정 게시글 수정
 	BrdDTO updtBrd(BrdDTO brdDTO);
+	
+	// 작성한 답글 등록
+	BrdDTO isrtRplyBrd(BrdDTO brdDTO);
 
 }

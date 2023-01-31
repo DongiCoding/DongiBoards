@@ -17,5 +17,12 @@ public interface BrdRepository extends JpaRepository<Brd, Integer> {
 	@Modifying
 	@Query(value="UPDATE T_BRD SET BRD_CNT = BRD_CNT + 1 WHERE BRD_NM = :brdNm", nativeQuery=true)
 	void updtBrdCnt(@Param("brdNm") int brdNm);
+	
+//	@Modifying
+//	@Query(value=""
+//			+ "INSERT INTO T_BRD(BRD_NM, BRD_CNT, BRD_CNTNT, BRD_DTTM, BRD_TTL, BRD_WRTR, BRD_CTGRY, BRD_ORGNM, BRD_GRPORDR, BRD_GRPLYR)\r\n"
+//			+ "VALUES()\r\n"
+//			, nativeQuery=true)
+//	void isrtRplyBrd(Brd brd);
 
 }

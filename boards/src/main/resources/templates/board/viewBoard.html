@@ -41,9 +41,10 @@
 		      </table>			
 		</div>
 		<div class="w-75 pt-3 pb-3 d-flex justify-content-end" id="write_btn_wrapper">
-			<button type="submit" class="btn btn-outline-primary" id="edtBtn" 
-			th:onclick="|location.href='@{/brd/brd/edt/{brdNm} (brdNm=${brdNm})}'|">Edit</button>
-
+			<button type="button" class="btn btn-outline-primary" id="edtBtn" 
+			th:onclick="|location.href='@{/brd/brd/edt/{brdNm} (brdNm=${brdNm})}'|">Edit</button>&emsp;
+			<button type="button" class="btn btn-outline-info" id="rpyBtn" 
+			th:onclick="|location.href='@{/brd/brd/rply/{brdNm} (brdNm=${brdNm})}'|">Reply</button>
 		</div>
 	</div>
 </html>

@@ -68,5 +68,4 @@ public class Brd {
 	@Column(nullable = false)                               // NotNull
 	@ColumnDefault("0")
 	private int brdGrpLyr;                                  // 게시글 답글의 층계, 예를 들어 답글의 답글을 달 수 있게 만듬
-	
 }

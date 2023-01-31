@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,7 +97,7 @@ public class BrdController {
 	
 	// 특정 게시글 삭제
 	@DeleteMapping("/dltBrd")
-	public void dltBrd(@RequestParam("brdNm") int brdNm ) {
+	public void dltBrd(@RequestParam("brdNm") int brdNm) {
 		brdService.dltBrd(brdNm);
 	}
 	
@@ -107,5 +108,26 @@ public class BrdController {
     	
 		return ResponseEntity.status(HttpStatus.OK).body(rtrndBrdDTO); 	
     }
+    
+    // 게시글의 답변 작성 페이지로 이동 (원글의 정보를 담아간다.)
+    @GetMapping("/brd/rply/{brdNm}")
+    public ModelAndView gtOrgnBrd(@PathVariable int brdNm) {
+    	BrdDTO rtrndBrdDTO = brdService.gtBrd(brdNm);
+    	
+    	ModelAndView mv = new ModelAndView();
+    	mv.setViewName("/board/replyBoard.html");
+    	mv.addObject("brd", rtrndBrdDTO);
+    	
+    	return mv;
+    }
+    
+    // 작성한 답글 보드 인서트(native query로 작성)
+    @PostMapping("/insrtRplyBrd")
+    public ResponseEntity<BrdDTO> isrtRplyBrd(@RequestBody BrdDTO brdDTO) {
+    	BrdDTO insrtdDTO = brdService.isrtRplyBrd(brdDTO);
+    	
+    	return ResponseEntity.status(HttpStatus.OK).body(insrtdDTO);
+    }
+    
 	
 }

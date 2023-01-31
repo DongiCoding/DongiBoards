@@ -1,0 +1,64 @@
+<!DOCTYPE>
+<html layout:decorate="~{layouts/layout}">
+	<th:block layout:fragment="script">
+	  <script th:inline="javascript">
+		  // jquery 시작
+		  $(function() {
+			  // Submit 버튼 클릭시 ajax로 정보를 보냄
+			  $("#rplyBtn").on("click", function() {  
+				  $.ajax({
+					  url: '/brd/insrtRplyBrd',
+					  type: 'post',
+					  data: JSON.stringify({
+							  brdTtl : $("#brdTtl").val(),
+							  brdWrtr : $("#brdWrtr").val(),
+							  brdCtgry : $("#brdCtgry").val(),
+							  brdCntnt : $("#brdCntnt").val(),
+							  brdOrgnNm : $("#brdNm").val(),
+							  brdGrpOrdr : $("#brdGrpOrdr").val(),
+							  brdGrpLyr : $("brdGrpLyr").val()
+			                 }),
+			          contentType: "application/json",
+					  success: function(data) {
+						  alert("It has been submitted.");
+						  window.location.href="/brd/brdList";
+					  },
+					  error: function(e) {
+						  console.log("ERROR: " + e);
+					  }
+				  });
+			  });
+		  });// jquery 끝
+	  </script>
+  </th:block>
+  <div layout:fragment="content">
+	<input type="hidden" id="brdNm" th:value="${brd.brdNm}">
+	<input type="hidden" id="brdCtgry" th:value="${brd.brdCtgry}">
+	<input type="hidden" id="brdOrgnNm" th:value="${brd.brdOrgnNm}">
+	<input type="hidden" id="brdGrpOrdr" th:value="${brd.brdGrpOrdr}">
+	<input type="hidden" id="brdGrpLyr" th:value="${brd.brdGrpLyr}">
+	<div class="w-50 p-3 m-auto">
+		<div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="inputGroup-sizing-default">TITLE</span>
+		  </div>
+		  <input id="brdTtl" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		</div>
+		<div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="inputGroup-sizing-default">WRITER</span>
+		  </div>
+		  <input id="brdWrtr" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		</div>
+		<div class="input-group">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text">CONTENT</span>
+		  </div>
+		  <textarea id="brdCntnt" class="form-control" aria-label="With textarea"></textarea>
+		</div>						
+	</div>
+	<div class="w-75 pt-3 pb-3 d-flex justify-content-end">
+		<button type="button" class="btn btn-outline-primary" id="rplyBtn">Submit</button>&emsp;
+	</div>
+  </div>
+</html>
