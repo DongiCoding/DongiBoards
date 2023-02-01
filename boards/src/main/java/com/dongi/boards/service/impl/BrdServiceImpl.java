@@ -60,12 +60,12 @@ public class BrdServiceImpl implements BrdService {
 				     .brdTtl(brdDTO.getBrdTtl())
 				     .brdWrtr(brdDTO.getBrdWrtr())
 				     .brdCtgry(brdDTO.getBrdCtgry())
-				     .brdOrgnNm(brdDTO.getBrdNm())                  // 원래 글의 번호를 넣어준다.
+				     .brdOrgnNm(brdDTO.getBrdOrgnNm())                  // 원래 글의 번호를 넣어준다.
 				     .build();
 		
-		brdRepository.save(brd);
+		Brd svdBrd = brdRepository.save(brd);
+		brdRepository.updtBrdOrgnNm(svdBrd.getBrdNm());             // 게시글의 brdNm과 brdOrgnNm을 맞춰주기 위해 보냄
 		brdRepository.flush();
-		
 	}
 	
 	// 게시글의 제목 클릭시 조회수 증가
@@ -135,9 +135,6 @@ public class BrdServiceImpl implements BrdService {
 	@Transactional
 	@Override
 	public BrdDTO isrtRplyBrd(BrdDTO brdDTO) {
-		System.out.println("****************************");
-		System.out.println(brdDTO);
-		System.out.println("****************************");
 		// DTO를 Entity로 전환
 		Brd brd = Brd.builder()
 			         .brdNm(brdDTO.getBrdNm())
@@ -150,9 +147,6 @@ public class BrdServiceImpl implements BrdService {
 			         .brdGrpOrdr(brdDTO.getBrdGrpOrdr() + 1)
 			         .brdGrpLyr(brdDTO.getBrdGrpLyr() + 1)
 			         .build();
-		System.out.println("****************************");
-		System.out.println(brd);
-		System.out.println("****************************");
 		
 		Brd insrtd = brdRepository.save(brd);
 		brdRepository.flush();

@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,8 +35,10 @@ public class BrdController {
 	@GetMapping("/brdList")
 	public ModelAndView gtBrdList(
 									BrdDTO brdDto,                                           // 화면단에 정보를 뿌려주기 위한 틀
-									@PageableDefault(page = 0, size = 10) Pageable pageable  // 페이지는 0부터 10개의 게시글
-								  ) {
+									@PageableDefault(page = 0, size = 10) @SortDefault.SortDefaults({
+										@SortDefault(sort = "brdOrgnNm", direction = Sort.Direction.DESC),
+										@SortDefault(sort = "brdGrpOrdr", direction = Sort.Direction.ASC)
+									}) Pageable pageable) {
 		// 받아온 리스트를 Page<Brd>
 		Page<BrdDTO> brdListDTO = brdService.getBrdList(pageable);
 		

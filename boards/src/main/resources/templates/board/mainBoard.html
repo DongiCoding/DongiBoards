@@ -18,7 +18,18 @@
 		    <tr>
 		      <td th:text="${brd.brdNm}"></td>
 		      <td th:text="${brd.brdCtgry}"></td>
-		      <td><a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+		      <th:block th:if="${brd.brdGrpOrdr == 0}">
+		      	<td id="titleTd">&emsp;<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+		      </th:block>
+		      <th:block th:if="${brd.brdGrpOrdr == 1}">
+		      	<td id="titleTd">&emsp;&emsp;└<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+		      </th:block>
+		      <th:block th:if="${brd.brdGrpOrdr == 2}">
+		      	<td id="titleTd">&emsp;&emsp;&emsp;└<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+		      </th:block>
+		      <th:block th:if="${brd.brdGrpOrdr == 3}">
+		      	<td id="titleTd">&emsp;&emsp;&emsp;&emsp;└<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+		      </th:block>
 		      <td th:text="${brd.brdWrtr}"></td>
 		      <td th:text="${brd.brdCnt}"></td>
 		      <td th:text="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}"></td>
