@@ -1,44 +1,75 @@
 <!DOCTYPE>
 <html layout:decorate="~{layouts/layout}">
-  <title layout:fragment="title">Main Boards</title>
-  <div layout:fragment="content">
-	<div class="w-75 p-3" id="table_wrapper">
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col" style="width: 10%;">Number</th>
-		      <th scope="col" style="width: 10%;">Category</th>
-		      <th scope="col" style="width: 40%;">Title</th>
-		      <th scope="col" style="width: 15%;">Writer</th>
-		      <th scope="col" style="width: 10%;">Views</th>
-		      <th scope="col" style="width: 15%;">Time</th>
-		    </tr>
-		  </thead>
-		  <tbody th:each="brd : ${brdList}">
-		    <tr>
-		      <td th:text="${brd.brdNm}"></td>
-		      <td th:text="${brd.brdCtgry}"></td>
-		      <th:block th:if="${brd.brdGrpOrdr == 0}">
-		      	<td id="titleTd">&emsp;<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
-		      </th:block>
-		      <th:block th:if="${brd.brdGrpOrdr == 1}">
-		      	<td id="titleTd">&emsp;&emsp;└<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
-		      </th:block>
-		      <th:block th:if="${brd.brdGrpOrdr == 2}">
-		      	<td id="titleTd">&emsp;&emsp;&emsp;└<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
-		      </th:block>
-		      <th:block th:if="${brd.brdGrpOrdr == 3}">
-		      	<td id="titleTd">&emsp;&emsp;&emsp;&emsp;└<a th:text="${brd.brdTtl}" th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
-		      </th:block>
-		      <td th:text="${brd.brdWrtr}"></td>
-		      <td th:text="${brd.brdCnt}"></td>
-		      <td th:text="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}"></td>
-		    </tr>
-		  </tbody>
-		</table>	
-	</div>
-	<div class="w-75 p-3 d-flex justify-content-end" id="write_btn_wrapper">
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='/brd/wrtBrd'">Write</button>&emsp;
-	</div>
-  </div>  
+	<title layout:fragment="title">Main Boards</title>
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			// jquery 시작
+			$(function () {
+				/*<![CDATA[*/
+					// 계층형 게시판을 만들기 위해 brdGrpOrdr의 값을 변수로 받아온다.
+					// Page 형태의 brdList 받아오기
+					let brdList = /*[[${brdList}]]*/;
+					
+					// 들여쓰기
+					const emsp = "&emsp;";
+					
+					// 반복문으로 모든 게시글의 brdGrpOrdr를 가져온다.
+					for(let i=0; i<brdList.content.length; i++) {
+						console.log(brdList.content[i].brdGrpOrdr);
+						if(brdList.content[i].brdGrpOrdr == 0) {
+							let titleTd = "";
+							titleTd += "<td class='titleTd'>";
+							titleTd += "</td>";
+//							$("#brdCtgryTd").after()
+						}
+					}
+					// 좀 더 알아보고 고치기
+				/*]]>*/
+			});// jquery 끝
+		</script>
+	</th:block>
+<div layout:fragment="content">
+  <div class="w-75 p-3" id="table_wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 10%;">Number</th>
+          <th scope="col" style="width: 10%;">Category</th>
+          <th scope="col" style="width: 40%;">Title</th>
+          <th scope="col" style="width: 15%;">Writer</th>
+          <th scope="col" style="width: 10%;">Views</th>
+          <th scope="col" style="width: 15%;">Time</th>
+        </tr>
+      </thead>
+      <tbody th:each="brd : ${brdList}">
+        <tr>
+          <td th:text="${brd.brdNm}"></td>
+          <td id="brdCtgryTd" th:text="${brd.brdCtgry}"></td>
+          <th:block th:if="${brd.brdGrpOrdr == 0}">
+            <td id="titleTd">&emsp;<a th:text="${brd.brdTtl}"
+                th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+          </th:block>
+          <th:block th:if="${brd.brdGrpOrdr == 1}">
+            <td id="titleTd">&emsp;&emsp;<img class="rplyPng" th:src="@{/images/reply.png}"><a th:text="${brd.brdTtl}"
+                th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+          </th:block>
+          <th:block th:if="${brd.brdGrpOrdr == 2}">
+            <td id="titleTd">&emsp;&emsp;&emsp;<img class="rplyPng" th:src="@{/images/reply.png}"><a th:text="${brd.brdTtl}"
+                th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+          </th:block>
+          <th:block th:if="${brd.brdGrpOrdr == 3}">
+            <td id="titleTd">&emsp;&emsp;&emsp;&emsp;<img class="rplyPng" th:src="@{/images/reply.png}"><a th:text="${brd.brdTtl}"
+                th:href="@{/brd/updtBrdCnt/{brdNm} (brdNm=${brd.brdNm})}"></a></td>
+          </th:block>
+          <td th:text="${brd.brdWrtr}"></td>
+          <td th:text="${brd.brdCnt}"></td>
+          <td th:text="${#temporals.format(brd.brdDttm, 'MM-dd HH:mm')}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="w-75 p-3 d-flex justify-content-end" id="write_btn_wrapper">
+    <button type="button" class="btn btn-outline-primary" onclick="location.href='/brd/wrtBrd'">Write</button>&emsp;
+  </div>
+</div>
 </html>
