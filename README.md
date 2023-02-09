@@ -10,4 +10,5 @@
 > 이미지 업로드 기능 구현
 
 ### 개선 해야될 사항
-> When user inserts an article, Sequence Generator always works even there is an error or exception. It should be fixed.
+> When user inserts an article, Sequence Generator always works even there is an error or exception. It should be fixed.  
+> Replied article doesn't show up when general articles are over than 10.
