@@ -43,7 +43,7 @@ public class Brd {
 	@ColumnDefault("0")
 	private int brdCnt;                                     // 게시글 조회수
 	
-	@Column(length = 1000, nullable = false)				// NotNull
+	@Column(length = 3000, nullable = false)				// NotNull
 	private String brdCntnt;								// 게시글 내용
 	
 	@Column(nullable = false)                               // NotNull

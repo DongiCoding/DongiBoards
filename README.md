@@ -8,3 +8,6 @@
 
 ## 3. 파일 업로드 기능 구현
 > 이미지 업로드 기능 구현
+
+### 개선 해야될 사항
+> When user inserts an article, Sequence Generator always works even there is an error or exception. It should be fixed.
