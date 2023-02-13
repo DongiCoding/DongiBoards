@@ -46,5 +46,6 @@
 			<button type="button" class="btn btn-outline-info" id="rpyBtn" 
 			th:onclick="|location.href='@{/brd/brd/rply/{brdNm} (brdNm=${brdNm})}'|">Reply</button>
 		</div>
+		<div th:replace="/comment/commentLayout :: comments"></div>
 	</div>
 </html>

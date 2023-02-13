@@ -1,0 +1,10 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<div th:fragment="comments">
+		<!-- 댓글 목록 -->
+		<div th:replace="/fragments/commentList :: commentList"></div>
+		
+		<!-- 댓글 등록 -->
+		<div th:replace="/fragments/commentInsert :: commentInsert"></div>
+	</div>
+</html>

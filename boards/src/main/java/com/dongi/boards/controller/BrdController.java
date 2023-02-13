@@ -71,6 +71,7 @@ public class BrdController {
 		brdService.updtBrdCnt(brdNm);
 		
 		response.sendRedirect("/brd/brd/" + brdNm);
+		response.sendRedirect("/cmmnt/brd/" + brdNm + "cmmnts");
 	}
 	
 	// 게시글의 제목 클릭시 게시글 상세조회
