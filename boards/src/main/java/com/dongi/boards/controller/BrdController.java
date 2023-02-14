@@ -1,6 +1,7 @@
 package com.dongi.boards.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,13 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dongi.boards.dto.BrdDTO;
+import com.dongi.boards.dto.CmmntDTO;
 import com.dongi.boards.service.BrdService;
+import com.dongi.boards.service.CmmntService;
 
 @RestController
 @RequestMapping("/brd")
 public class BrdController {
 	// 보드 서비스 객체
 	@Autowired private BrdService brdService;
+	
+	// 댓글 서비스 객체
+	@Autowired private CmmntService cmmntService;
 	
 	// 보드 리스트를 불러오는 맵핑
 	@GetMapping("/brdList")
@@ -71,18 +77,19 @@ public class BrdController {
 		brdService.updtBrdCnt(brdNm);
 		
 		response.sendRedirect("/brd/brd/" + brdNm);
-		response.sendRedirect("/cmmnt/brd/" + brdNm + "cmmnts");
 	}
 	
-	// 게시글의 제목 클릭시 게시글 상세조회
+	// 게시글의 제목 클릭시 게시글과 댓글 상세조회
 	@GetMapping("/brd/{brdNm}")
 	public ModelAndView gtBrd(@PathVariable int brdNm) {
 		// 화면단에 보여주기 위해 SERVICE에서 DTO로 변환할 예정
 		BrdDTO brdDTO = brdService.gtBrd(brdNm);
+		List<CmmntDTO> cmmntListDTO = cmmntService.gtcmmntList(brdNm);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/viewBoard.html");
 		mv.addObject("brd", brdDTO);
+		mv.addObject("cmmntList", cmmntListDTO);
 		
 		return mv;
 	}

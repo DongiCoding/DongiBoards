@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CmmntDTO {
 	private int cmmntId;
-	private int brdId;
+	private int brdNm;
 	private String cmmntWrtr;
 	private String cmmntCntnt;
 	

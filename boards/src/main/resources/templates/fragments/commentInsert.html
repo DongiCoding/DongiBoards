@@ -1,5 +1,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<div th:fragment="commentInsert">
-		
+		<!-- 댓글 작성 폼-->
+		<div class="w-75 p-3 d-flex" id="table_wrapper">
+			<div class="card-body">
+				<form id="cmmntFrm">
+					<!-- 유저 이름 -->
+					<div class="mb-3">
+						<label class="form-label">User name</label>
+						<input class="form-control form-control-sm" id="cmmntWrtr" name="cmmntWrtr">
+					</div>
+					<!--댓글 본문 -->
+					<div class="mb-3">
+						<label class="form-label">Content</label>
+						<textarea class="form-control form-control-sm" rows="3" id="cmmntCntnt" name="cmmntCntnt"></textarea>
+					</div>
+					<!-- brdNm -->
+					<input type="hidden" th:value="${brd.brdNm}" id="brdNm" name="brdNm">	
+				</form>
+				<!-- 전송 버튼 -->
+				<div class="w-100 pt-3 pb-3 d-flex justify-content-end" id="write_btn_wrapper">
+					<button type="button" class="btn btn-outline-primary" id="cmmntSbmtBtn">Submit</button>
+				</div>	
+			</div>
+		</div>
 	</div>
 </html>

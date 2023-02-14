@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layouts/layout}">
 	<title layout:fragment="title">View Board</title>
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			//jQuery 시작
+			$(function() {
+				/*<![CDATA[*/
+				// brdNm 가져오기
+				let brdNm = /*[[${brd.brdNm}]]*/;
+				
+				// 댓글 등록 버튼 작동
+				$("#cmmntSbmtBtn").on("click", function() {
+					//let cmmntFrm = $("#cmmntFrm").serialize();
+					
+					const cmmntFrm = {
+						brdNm : $("#brdNm").val(),
+						cmmntWrtr : $("#cmmntWrtr").val(),
+						cmmntCntnt : $("#cmmntCntnt").val()
+					};
+					
+					
+					$.ajax({
+						type: "post",
+						url: "/brd/brd/"+brdNm+"/insrtCmmnt",
+						data: JSON.stringify(cmmntFrm),
+						dataType: "json",
+						contentType: "application/json",
+						async: false,
+						success: function(data) {
+							alert("It has been submitted.");
+							window.location.reload();
+						},
+						error: function(e) {
+							alert("It has been failed.");
+							console.log("ERROR: " + e);
+						}
+					});
+				});
+				/*]]>*/
+			}); //jQuery 끝
+		</script>
+	</th:block>
 	<div layout:fragment="content">
 		<div class="w-75 p-3" id="table_wrapper">
 		    <table class="table table-hover">
@@ -46,6 +86,7 @@
 			<button type="button" class="btn btn-outline-info" id="rpyBtn" 
 			th:onclick="|location.href='@{/brd/brd/rply/{brdNm} (brdNm=${brdNm})}'|">Reply</button>
 		</div>
+		<br><br><hr>
 		<div th:replace="/comment/commentLayout :: comments"></div>
 	</div>
 </html>

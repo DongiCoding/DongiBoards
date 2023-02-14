@@ -28,3 +28,8 @@
 .rplyPng {
 	width: 25px;
 }
+
+.card-header {
+	font-weight: bold;
+	font-size: 1.25em;	
+}

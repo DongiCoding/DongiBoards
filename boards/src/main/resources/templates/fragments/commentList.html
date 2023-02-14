@@ -1,5 +1,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<!-- 댓글 리스트 -->
 	<div th:fragment="commentList">
-		
+		<th:block th:each="cmmnt : ${cmmntList}">
+			<div class="w-75 p-3" id="table_wrapper">
+				<div class="card">
+				  <div class="card-header" style="display: inline-block;">
+					<div th:text="${cmmnt.cmmntWrtr}" style="width: 610px; float: left;"></div>				  
+					<div class="dropdown">
+					  <a class="icon" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					    <i class="bi bi-three-dots-vertical" style="color:darkgrey"></i>
+					  </a>
+					  <ul class="dropdown-menu">
+					    <li><a class="dropdown-item" href="#">Edit</a></li>
+					    <li><a class="dropdown-item" href="#">Delete</a></li>
+					  </ul>
+					</div>					
+				  </div>				  
+				  <div class="card-body">
+				    <p class="card-text" th:text="${cmmnt.cmmntCntnt}"></p>
+				  </div>
+				  <input type="hidden" th:value="${cmmnt.cmmntId}">
+				</div>
+			</div>	    
+		</th:block>
+		<hr>
 	</div>
 </html>
