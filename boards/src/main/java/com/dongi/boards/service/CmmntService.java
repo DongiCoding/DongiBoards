@@ -11,5 +11,8 @@ public interface CmmntService {
 	
 	// 댓글 등록
 	CmmntDTO insrtCmmnt(int brdNm, CmmntDTO cmmntDTO);
+	
+	// 댓글 삭제
+	void dltCmmnt(int cmmntId);
 
 }

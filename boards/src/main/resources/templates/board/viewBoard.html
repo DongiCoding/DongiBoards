@@ -36,7 +36,28 @@
 							console.log("ERROR: " + e);
 						}
 					});
-				});
+				});// 댓글 등록 버튼 작동 끝
+				
+				// 댓글 삭제 버튼 작동
+				$(".dltBtn").on("click", function(e) {
+					const targetId = $(e.target).attr("data-cmmnt-id");
+					console.log("코멘트 아이디");
+					console.log(targetId);
+					
+					$.ajax({
+						type: "delete",
+						url: "/brd/brd/dltCmmnt",
+						data: { cmmntId : targetId },
+						success: function(data) {
+							alert("It has been deleted.");
+							window.location.reload();
+						},
+						error: function(e) {
+							alert("It has been failed.");
+							console.log("ERROR: " + e);
+						}
+					});
+				});// 댓글 삭제 버튼 작동
 				/*]]>*/
 			}); //jQuery 끝
 		</script>

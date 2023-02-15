@@ -56,5 +56,13 @@ public class CmmntServiceImpl implements CmmntService {
 		// 저장된 ENTITY를 DTO로 변환해서 반환
 		return CmmntDTO.trnsfrTCmmntDTO(insrtdCmmnt);
 	}
+	
+	// 댓글 삭제
+	@Transactional
+	@Override
+	public void dltCmmnt(int cmmntId) {
+		// 댓글 삭제
+		cmmntRepository.deleteById(cmmntId);
+	}
 
 }
