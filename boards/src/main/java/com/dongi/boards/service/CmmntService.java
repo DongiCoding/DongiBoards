@@ -14,5 +14,8 @@ public interface CmmntService {
 	
 	// 댓글 삭제
 	CmmntDTO dltCmmnt(CmmntDTO cmmntDTO);
+	
+	// 댓글 수정
+	CmmntDTO edtCmmnt(CmmntDTO cmmntDTO);
 
 }

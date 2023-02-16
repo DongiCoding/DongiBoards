@@ -37,4 +37,13 @@ public class CmmntController {
 		return ResponseEntity.status(HttpStatus.OK).body(dltdCmmntDTO);
 	}
 	
+	// 댓글 수정
+	@PostMapping("/brd/edtCmmnt")
+	public ResponseEntity<CmmntDTO> edtCmmnt(@RequestBody CmmntDTO cmmntDTO) {
+		
+		CmmntDTO edtdCmmntDTO = cmmntService.edtCmmnt(cmmntDTO);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(edtdCmmntDTO);
+	}
+	
 }

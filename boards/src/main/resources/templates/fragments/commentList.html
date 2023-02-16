@@ -11,8 +11,14 @@
 					    <i class="bi bi-three-dots-vertical" style="color:darkgrey"></i>
 					  </a>
 					  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="#">Edit</a></li>
-					    <li><button class="dropdown-item dltBtn" th:data-cmmnt-id="${cmmnt.cmmntId}">Delete</button></li>
+						<!-- 수정 버튼 모달 -->
+					    <li><button type="button" 
+					    			class="dropdown-item" 
+					    			data-toggle="modal" 
+					    			data-target="#editModal">Edit</button></li>	
+					    <!-- 삭제 버튼 -->
+					    <li><button class="dropdown-item dltBtn" 
+					    			th:data-cmmnt-id="${cmmnt.cmmntId}">Delete</button></li>
 					  </ul>
 					</div>					
 				  </div>				  

@@ -68,6 +68,33 @@
 						}); //ajax 끝
 					}; // if문 끝
 				});// 댓글 삭제 버튼 작동
+				
+				// 댓글 수정 버튼 작동
+				$(".edtBtn").on("click", function(e) {
+					const edtFrm = {
+						brdNm : $("#brdNm").val(),                          // 보드 넘버
+						cmmntId : $(e.target).attr("data-edt-cmmnt-id"),    // 수정할 댓글 아이디
+						cmmntWrtr : $("#edtWrtr").val(),                    // 수정 작성자
+						cmmntCntnt : $("#edtCntnt").val()                   // 수정 내용
+					};
+					
+					$.ajax({
+						type: "post",
+						url: "/brd/brd/edtCmmnt",
+						data: JSON.stringify(edtFrm),
+						dataType: "json",
+						contentType: "application/json",
+						async: false,
+						success: function(data) {
+							alert("It has been edited.");
+							window.location.reload();
+						},
+						error: function(e) {
+							alert("It has been failed.");
+							console.log("ERROR: " + e);
+						}
+					});// ajax끝 
+				});// 댓글 수정 버튼 작동 끝
 				/*]]>*/
 			}); //jQuery 끝
 		</script>

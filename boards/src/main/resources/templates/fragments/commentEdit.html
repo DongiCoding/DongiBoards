@@ -1,0 +1,32 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<!-- 댓글 수정 모달 -->
+	<div th:fragment="commentEdit">
+		<th:block th:each="cmmnt : ${cmmntList}">
+		    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="editModalLabel">Edit Comment</h5>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+			          <div class="form-group">
+			            <label for="writer" class="col-form-label">Writer</label>
+			            <input type="text" class="form-control" id="edtWrtr">
+			          </div>
+			          <div class="form-group">
+			            <label for="edit-comment" class="col-form-label">Comment</label>
+			            <textarea class="form-control" id="edtCntnt"></textarea>
+			          </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary edtBtn" th:data-edt-cmmnt-id="${cmmnt.cmmntId}">Submit</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</th:block>		
+	</div>
+</html>

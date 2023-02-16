@@ -78,4 +78,27 @@ public class CmmntServiceImpl implements CmmntService {
 		
 	}
 
+	@Override
+	public CmmntDTO edtCmmnt(CmmntDTO cmmntDTO) {
+		// 보드 넘버 가져오기
+		int brdNm = cmmntDTO.getBrdNm();
+		
+		// 게시글이 없는 경우 예외 처리
+		Brd brd = brdRepository.findById(brdNm)
+				.orElseThrow(() -> new IllegalArgumentException("There is no brd that what you are looking for"));
+		
+		// DTO를 ENTITY로 변환
+		Cmmnt cmmnt  = Cmmnt.builder()
+							.brd(brd)
+							.cmmntId(cmmntDTO.getCmmntId())
+							.cmmntWrtr(cmmntDTO.getCmmntWrtr())
+							.cmmntCntnt(cmmntDTO.getCmmntCntnt())
+				            .build();
+		
+		// 변경된 댓글 저장
+		cmmntRepository.save(cmmnt);
+		
+		return CmmntDTO.trnsfrTCmmntDTO(cmmnt);
+	}
+
 }
