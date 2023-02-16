@@ -60,9 +60,22 @@ public class CmmntServiceImpl implements CmmntService {
 	// 댓글 삭제
 	@Transactional
 	@Override
-	public void dltCmmnt(int cmmntId) {
-		// 댓글 삭제
-		cmmntRepository.deleteById(cmmntId);
+	public CmmntDTO dltCmmnt(CmmntDTO cmmntDTO) {
+		// 보드 넘버 변수
+		int brdNm = cmmntDTO.getBrdNm();
+		
+		// 삭제할 댓글 아이디
+		int cmmntId = cmmntDTO.getCmmntId();
+		
+		// 삭제할 댓글 찾기
+		Cmmnt dltdCmmnt = cmmntRepository.findCmmntWithBrdNmCmmntId(brdNm, cmmntId);
+		
+		// 댓글 삭제하기
+		cmmntRepository.delete(dltdCmmnt);
+		
+		return CmmntDTO.trnsfrTCmmntDTO(dltdCmmnt);
+		
+		
 	}
 
 }

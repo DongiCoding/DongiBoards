@@ -13,6 +13,6 @@ public interface CmmntService {
 	CmmntDTO insrtCmmnt(int brdNm, CmmntDTO cmmntDTO);
 	
 	// 댓글 삭제
-	void dltCmmnt(int cmmntId);
+	CmmntDTO dltCmmnt(CmmntDTO cmmntDTO);
 
 }

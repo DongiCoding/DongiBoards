@@ -15,5 +15,11 @@ public interface CmmntRepository extends JpaRepository<Cmmnt, Integer> {
 			+ "FROM T_CMMNT\r\n"
 			+ "WHERE BRD_NM = :brdNm", nativeQuery=true)
 	List<Cmmnt> findByBrdNm(@Param("brdNm")int brdNm);
+	
+	@Query(value=""
+			+ "SELECT *\r\n"
+			+ "FROM T_CMMNT\r\n"
+			+ "WHERE BRD_NM = :brdNm AND CMMNT_ID = :cmmntId", nativeQuery=true)
+	Cmmnt findCmmntWithBrdNmCmmntId(@Param("brdNm")int brdNm, @Param("cmmntId")int cmmntId);
 
 }

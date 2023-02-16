@@ -40,23 +40,33 @@
 				
 				// 댓글 삭제 버튼 작동
 				$(".dltBtn").on("click", function(e) {
-					const targetId = $(e.target).attr("data-cmmnt-id");
-					console.log("코멘트 아이디");
-					console.log(targetId);
 					
-					$.ajax({
-						type: "delete",
-						url: "/brd/brd/dltCmmnt",
-						data: { cmmntId : targetId },
-						success: function(data) {
-							alert("It has been deleted.");
-							window.location.reload();
-						},
-						error: function(e) {
-							alert("It has been failed.");
-							console.log("ERROR: " + e);
-						}
-					});
+					if(!confirm("Are you sure?")) {
+						return;	
+					} else {
+						const dltFrm = { 
+							brdNm : $("#brdNm").val(),                       // 보드 넘버
+							cmmntId : $(e.target).attr("data-cmmnt-id")      // 댓글 아이디
+							};
+					
+					
+						$.ajax({
+							type: "post",
+							url: encodeURI("/brd/brd/dltCmmnt"),
+							data: JSON.stringify(dltFrm),
+							dataType: "json",
+							contentType: "application/json",
+							async: false,
+							success: function(data) {
+								alert("It has been deleted.");
+								window.location.reload();
+							},
+							error: function(e) {
+								alert("It has been failed.");
+								console.log("ERROR: " + e);
+							}
+						}); //ajax 끝
+					}; // if문 끝
 				});// 댓글 삭제 버튼 작동
 				/*]]>*/
 			}); //jQuery 끝

@@ -3,12 +3,10 @@ package com.dongi.boards.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dongi.boards.dto.CmmntDTO;
@@ -31,10 +29,12 @@ public class CmmntController {
 	}
 	
 	// 댓글 삭제
-	@DeleteMapping("/brd/dltCmmnt")
-	public void dltCmmnt(@RequestParam("cmmntId") String cmmntId) {
+	@PostMapping("/brd/dltCmmnt")
+	public ResponseEntity<CmmntDTO> dltCmmnt(@RequestBody CmmntDTO cmmntDTO) {
 		
-		cmmntService.dltCmmnt(Integer.parseInt(cmmntId));
+		CmmntDTO dltdCmmntDTO = cmmntService.dltCmmnt(cmmntDTO);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(dltdCmmntDTO);
 	}
 	
 }
